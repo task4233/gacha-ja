@@ -5,7 +5,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/gohandon/gacha-ja/skeleton/section04/step02/gacha"
+	"github.com/task4233/gacha-ja/skeleton/section04/step02/gacha"
 )
 
 func main() {

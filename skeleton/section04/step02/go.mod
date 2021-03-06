@@ -1,3 +1,3 @@
-module github.com/gohandon/gacha-ja/skeleton/section04/step02
+module github.com/task4233/gacha-ja/skeleton/section04/step02
 
 go 1.15
