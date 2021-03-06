@@ -4,7 +4,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
+	"os"
 	"time"
 )
 
@@ -18,10 +20,16 @@ func main() {
 	fmt.Println("1: 単発ガチャ 2: 11連ガチャ")
 
 	// TODO: LOOPというラベルのついた無限ループを作る
-
+LOOP:
+	for {
 		fmt.Print(">")
 		var kind int
 		// TODO: 変数kindに入力した値を入れる
+		_, err := fmt.Scanln(&kind)
+		if err != nil {
+			log.Printf("failed to Scanln: %s", err.Error())
+			os.Exit(1)
+		}
 
 		switch kind {
 		case 1: // 単発ガチャ
@@ -29,13 +37,15 @@ func main() {
 			break LOOP
 		case 2: // 11連ガチャ
 			// TODO: 変数nに11を入れる
-
+			n = 11
 			break LOOP
 		default:
 			fmt.Println("もう一度入力してください")
 		}
+	}
 
-	for i := 1; /* TODO: 継続条件をiがn以下の場合とする */; i++ {
+	/* TODO: 継続条件をiがn以下の場合とする */
+	for i := 1; i <= n; i++ {
 
 		// 0から99までの間で乱数を生成する
 		num := rand.Intn(100)
