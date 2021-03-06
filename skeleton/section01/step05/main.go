@@ -20,4 +20,20 @@ func main() {
 	// TODO: 変数numが0のときは"ノーマル"、
 	// 1のときは"R"、2のときは"SR"、
 	// 3のときは"XR"と表示する
+	var msg string
+	switch num {
+	case 0:
+		msg = "ノーマル"
+		break
+	case 1:
+		msg = "R"
+		break
+	case 2:
+		msg = "SR"
+		break
+	case 3:
+		msg = "XR"
+		break
+	}
+	fmt.Println(msg)
 }
