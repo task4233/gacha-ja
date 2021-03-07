@@ -12,15 +12,15 @@ func init() {
 }
 
 type Play struct {
-	player *Player
+	player  *Player
 	results []*Card
 	summary map[Rarity]int
-	err error
+	err     error
 }
 
 func NewPlay(p *Player) *Play {
 	return &Play{
-		player: p,
+		player:  p,
 		summary: make(map[Rarity]int),
 	}
 }
@@ -46,10 +46,13 @@ func (p *Play) Err() error {
 
 func (p *Play) Draw() bool {
 	// TODO: エラーがすでに発生した場合はfalseを返す
+	if p.err != nil {
+		return false
+	}
 
 	if err := p.player.draw(1); err != nil {
 		// TODO: エラーをフィールドに代入する
-
+		p.err = err
 		return false
 	}
 
