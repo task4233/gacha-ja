@@ -5,8 +5,7 @@ package main
 import (
 	"fmt"
 
-	// TODO: インポートパスを公開したものに変更する
-	"github.com/gohandson/tenntenn/gacha"
+	"github.com/task4233/gacha-ja/skeleton/section04/step02/gacha"
 )
 
 func main() {
