@@ -1,3 +1,5 @@
+package gacha_test
+
 // TODO: gachaパッケージとは別でgacha_testパッケージにする
 
 import (
@@ -12,15 +14,17 @@ func TestPlayer_DrawableNum(t *testing.T) {
 		coin    int
 		want    int
 	}{
-		"zero-zero":      {0, 0, 0},
-		"plus-zero":      {10, 0, 10},
-		"plus-plus":      {10, 10, 11},
-		"zero-plus":      {0, 10, 1},
+		"zero-zero": {0, 0, 0},
+		"plus-zero": {10, 0, 10},
+		"plus-plus": {10, 10, 11},
+		"zero-plus": {0, 10, 1},
 		// TODO: コインが1回分に満たない場合のテスト
+		"zero-one": {0, 1, 0},
 	}
 
 	for name, tt := range cases {
 		// TODO: ttをこのスコープで再定義しておく
+		tt := tt
 
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
@@ -28,6 +32,7 @@ func TestPlayer_DrawableNum(t *testing.T) {
 			got := p.DrawableNum()
 			if got != tt.want {
 				// TODO: 分かりやすいメッセージを出してテストを失敗させる
+				t.Fatalf("fail DrawableNum=> got: %d, want: %d", got, tt.want)
 			}
 		})
 	}

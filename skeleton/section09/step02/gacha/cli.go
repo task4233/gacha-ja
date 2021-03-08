@@ -72,7 +72,7 @@ func (cli *client) drawCard(cards []*Card) (*Card, error) {
 	ids := make([]string, len(cards))
 	cardMap := make(map[string]*Card, len(cards))
 	for i := range cards {
-		ids[i] = cards[i].ID+":1"
+		ids[i] = cards[i].ID + ":1"
 		cardMap[cards[i].ID] = cards[i]
 	}
 	q := strings.Join(ids, ",")
