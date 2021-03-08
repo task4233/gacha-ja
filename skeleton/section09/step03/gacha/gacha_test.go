@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/gohandson/gacha-ja/gacha"
+	"github.com/task4233/gacha-ja/skeleton/section9/step03/gacha"
 )
 
 func TestPlay_Draw(t *testing.T) {
@@ -16,9 +16,10 @@ func TestPlay_Draw(t *testing.T) {
 		wantCard string
 		wantErr  bool
 	}{
-		"zero":  {0, cli(t, "card", false), false, "-", true},
-		"one":   {1, cli(t, "card", false), true, "card", false},
+		"zero": {0, cli(t, "card", false), false, "-", true},
+		"one":  {1, cli(t, "card", false), true, "card", false},
 		// TODO: クライアントでエラーが発生した場合のテストケース
+		"client error": {1, cli(t, "card", true), false, "-", true},
 	}
 
 	for name, tt := range cases {
@@ -32,7 +33,7 @@ func TestPlay_Draw(t *testing.T) {
 			switch {
 			case !tt.wantErr && play.Err() != nil:
 				t.Fatal("unexpected error", play.Err())
-			// TODO: エラーを期待している場合にエラーが発生しているかテストする
+				// TODO: エラーを期待している場合にエラーが発生しているかテストする
 			}
 
 			if got != tt.wantRet {
@@ -63,8 +64,15 @@ type mockClient struct {
 }
 
 // TODO: *mockClient型がgacha.Clientインタフェースを実装しているかチェック
+var _ gacha.Client = (*mockClient)(nil)
 
 // TODO: *mockClient型にDrawメソッドを定義する
 // 引数は使わない
 // 戻り値はerrフィールドがnilでない場合はnilとそのエラーを返す
 // そうでない場合はcardフィールドの値とnilを返す
+func (cli *mockClient) Draw(_ gacha.Distribution) (*gacha.Card, error) {
+	if cli.err != nil {
+		return nil, cli.err
+	}
+	return cli.card, nil
+}
