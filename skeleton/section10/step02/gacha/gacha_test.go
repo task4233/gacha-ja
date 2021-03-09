@@ -1,10 +1,11 @@
 package gacha_test
 
 import (
+	"context"
 	"errors"
 	"testing"
 
-	"github.com/gohandson/gacha-ja/gacha"
+	"github.com/task4233/gacha-ja/skeleton/section10/step02/gacha"
 )
 
 func TestPlay_Draw(t *testing.T) {
@@ -30,7 +31,7 @@ func TestPlay_Draw(t *testing.T) {
 			p := gacha.NewPlayer(tt.tickets, 0)
 			play := gacha.NewPlay(p)
 			play.Client = tt.cli
-			got := play.Draw()
+			play.Draw(context.Background())
 			switch {
 			case !tt.wantErr && play.Err() != nil:
 				t.Fatal("unexpected error", play.Err())
@@ -38,11 +39,7 @@ func TestPlay_Draw(t *testing.T) {
 				t.Fatal("expected error does not occur")
 			}
 
-			if got != tt.wantRet {
-				t.Errorf("want card %v but got %v", tt.wantCard, got)
-			}
-
-			gotCard := play.Result()
+			gotCard := <-play.Result()
 			if gotCard != nil && tt.wantCard != "-" && gotCard.Name != tt.wantCard {
 				t.Errorf("want card %v but got %v", tt.wantCard, gotCard.Name)
 			}

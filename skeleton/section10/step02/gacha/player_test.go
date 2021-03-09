@@ -3,7 +3,7 @@ package gacha_test
 import (
 	"testing"
 
-	"github.com/gohandson/gacha-ja/gacha"
+	"github.com/task4233/gacha-ja/skeleton/section10/step02/gacha"
 )
 
 func TestPlayer_DrawableNum(t *testing.T) {

@@ -18,7 +18,7 @@ func NewPlay(p *Player) *Play {
 		resultCh: make(chan *Card),
 		// TODO: error型のチャネルをmake関数で生成する
 		// errChフィールドに入れる
-
+        errCh: make(chan error),
 	}
 }
 
@@ -29,7 +29,7 @@ func (p *Play) client() Client {
 	return defaultClient
 }
 
-func (p *Play) Result() /* TODO: 受信専用として返す */ {
+func (p *Play) Result() <-chan *Card /* TODO: 受信専用として返す */ {
 	return p.resultCh
 }
 
@@ -50,11 +50,11 @@ func (p *Play) Draw(ctx context.Context) {
 	card, err := p.draw()
 	if err != nil {
 		// TODO: エラーをp.errChへ送信する
-
+        p.errCh <- err
 		return
 	}
 	// TODO: cardをp.resultChへ送信する
-
+    p.resultCh <- card
 }
 
 func (p *Play) draw() (*Card, error) {

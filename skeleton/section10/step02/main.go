@@ -13,7 +13,7 @@ import (
 	"strconv"
 
 	"cloud.google.com/go/datastore"
-	"github.com/gohandson/gacha-ja/gacha"
+	"github.com/task4233/gacha-ja/skeleton/section10/step02/gacha"
 	"google.golang.org/api/iterator"
 )
 
@@ -94,6 +94,7 @@ func run() (rerr error) {
 		for i := 0; i < num; i++ {
 			// TODO: ゴールーチンでplay.Drawメソッドを呼び出す
 			// 引数はctxを用いる
+			play.Draw(ctx)
 
 		}
 
@@ -104,9 +105,9 @@ func run() (rerr error) {
 					http.Error(w, err.Error(), http.StatusInternalServerError)
 					return
 				}
-			// TODO: play.Errメソッドから取得できるチャネルから受信する
-			// 結果をerr変数に代入する
-
+				// TODO: play.Errメソッドから取得できるチャネルから受信する
+				// 結果をerr変数に代入する
+			case err := <-play.Err():
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
