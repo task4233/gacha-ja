@@ -12,7 +12,7 @@ import (
 	"strconv"
 
 	"cloud.google.com/go/datastore"
-	"github.com/gohandson/gacha-ja/gacha"
+    "github.com/task4233/gacha-ja/skeleton/section09/step03/gacha"
 	"google.golang.org/api/iterator"
 )
 

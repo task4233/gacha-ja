@@ -4,7 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/task4233/gacha-ja/skeleton/section9/step03/gacha"
+
+	"github.com/task4233/gacha-ja/skeleton/section09/step03/gacha"
 )
 
 func TestPlay_Draw(t *testing.T) {
