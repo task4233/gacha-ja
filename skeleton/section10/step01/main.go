@@ -86,6 +86,7 @@ func run() (rerr error) {
 		// trace.NewTask関数を用いる
 		// 第1引数のコンテキストはr.Contextメソッドから取得する
 
+        ctx, task = trace.NewTask(r.Context, "draw handler")
 		defer task.End()
 
 		num, err := strconv.Atoi(r.FormValue("num"))

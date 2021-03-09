@@ -1,6 +1,7 @@
 package gacha_test
 
 import (
+    "context"
 	"errors"
 	"testing"
 
@@ -30,7 +31,7 @@ func TestPlay_Draw(t *testing.T) {
 			p := gacha.NewPlayer(tt.tickets, 0)
 			play := gacha.NewPlay(p)
 			play.Client = tt.cli
-			got := play.Draw()
+			got := play.Draw(context.Background())
 			switch {
 			case !tt.wantErr && play.Err() != nil:
 				t.Fatal("unexpected error", play.Err())
