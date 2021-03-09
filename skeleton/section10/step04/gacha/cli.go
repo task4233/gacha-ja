@@ -52,7 +52,7 @@ func (cli *client) sendRequest(q string) ([]byte, error) {
 	// ベースとなるコンテキストはcontext.Background関数で生成する
 	// タイムアウトの時間はcli.timeoutフィールドから取得する
 	// 第1戻り値は変数ctx、第2戻り値はcancel変数に代入する
-
+	ctx, cancel := context.WithTimeout(context.Background(), cli.timeout)
 	defer cancel()
 
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, cli.baseURL+"?delay=on&q="+q, nil)

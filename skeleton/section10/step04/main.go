@@ -95,6 +95,7 @@ func run() (rerr error) {
 		// TODO: errgroup.WithContext関数で*errgroup.Group型の値とコンテキストを生成する
 		// 引数はctx
 		// 戻り値は変数egとctxに代入する
+		eg, ctx := errgroup.WithContext(context.Background())
 		for i := 0; i < num; i++ {
 			eg.Go(func() error {
 				result, err := play.Draw(ctx)
